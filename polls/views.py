@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, Category, Comment
+from django.views import View
+from .models import Post, Category, Comment, Profile
 from .forms import PostForm, EditForm, CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
@@ -116,3 +118,14 @@ class DeletePostView(DeleteView):
         context = super(DeletePostView, self).get_context_data(*args, **kwargs)
         context['cat_menu'] = cat_menu
         return context
+
+class UserSearch(View):
+    def get(self, request, *args, **kwargs):
+        query = self.request.GET.get('query')
+        profile_list = Profile.objects.filter(
+            Q(user__username__icontains=query)
+        )
+        context = {
+            'profile_list': profile_list,
+        }
+        return render(request, 'polls/search.html', context)
