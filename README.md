@@ -1,5 +1,6 @@
 # FlyChat
-Our team name is "Hypertext Assassins". 
+
+Our team name is "Hypertext Assassins".
 
 Our members: Amangeldin Erasyl, Rakhmetova Zhanar & Dauletova Maira.
 
