@@ -46,6 +46,8 @@
         {% endif %}
 
         {% if user.is_authenticated %}
+
+
           <li class="nav-item">
             <a class="nav-link" href="{% url 'add_post' %}">Add Post</a>
           </li>
@@ -67,6 +69,15 @@
 
       </ul>
       {% if user.is_authenticated %}
+
+          <form class="d-flex" method="GET" action="{% url 'profile-search' %}">
+    <div class="input-group">
+        <span class="input-group-text" id="basic-addon1">@</span>
+        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="query" value="{{ request.GET.query }}">
+        <button style="border: none; background-color: transparent; box-shadow: none" type="submit"><i class="fas fa-search"> </i> </button>
+    </div>
+         </form>
+
           <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
 
             <li class="nav-item dropdown">
