@@ -5,16 +5,21 @@
 
 {% if user.is_authenticated %}
     {% if user.id == profile.user.id %}
-        <h1>Edit Profile Page...</h1>
-        <br/><br/>
-
-        <div class="form-group">
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button class="btn btn-secondary">Update Profile Page</button>
-            </form>
+    <div class="row justify-content-center">
+        <h1 class="row justify-content-center">Edit Profile Page...</h1>
+        <div class="col-md-6 col-sm-12">
+            <br/><br/>
+            <div class="form-group">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-secondary">Update Profile Page</button>
+                </form>
+            </div>
         </div>
+    </div>
+
+    <br/><br/>
 
     {% else %}
         You are not the correct User To Edit This Page

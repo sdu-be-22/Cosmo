@@ -2,10 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.views import View
-<<<<<<< HEAD
-=======
-from django.db.models import Q
->>>>>>> beb60bffa4fb4fd7e46e26abe851ce50bff72773
 from .models import Post, Category, Comment, Profile
 from .forms import PostForm, EditForm, CommentForm
 from django.urls import reverse_lazy, reverse
@@ -40,7 +36,6 @@ class HomeView(ListView):
 def CategoryListView(request):
     cat_menu_list = Category.objects.all()
     return render(request, 'polls/category_list.html', {'cat_menu_list':cat_menu_list})
-
 
 def CategoryView(request, cats):
     category_posts = Post.objects.filter(category=cats.replace('-', ' '))
@@ -132,8 +127,5 @@ class UserSearch(View):
         context = {
             'profile_list': profile_list,
         }
-<<<<<<< HEAD
+
         return render(request, 'polls/search.html', context)
-=======
-        return render(request, 'polls/search.html', context)
->>>>>>> beb60bffa4fb4fd7e46e26abe851ce50bff72773
