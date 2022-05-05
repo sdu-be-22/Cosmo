@@ -1,7 +1,35 @@
-# FlyChat
+# Cosmo
+Website written of django for Users.
 
+# Description of project
+We are going to create a social network, where users can create a post and a public profile and communicate with other users, also people with similar interests could come together and share information, photos and videos.
+
+# Mentor
+Bissenbay Dauletbayev - b.dauletbayev@sdu.edu.kz
+
+# Team members
 Our team name is "Hypertext Assassins".
 
-Our members: Amangeldin Erasyl, Rakhmetova Zhanar & Dauletova Maira.
+Amangeldin Erasyl - 200103252@stu.sdu.edu.kz
+Rakhmetova Zhanar - 200103526@stu.sdu.edu.kz
+Dauletova Maira - 200103
 
-We are going to create a social network, where users can create a post and a public profile and communicate with other users, also people with similar interests could come together and share information, photos and videos. The basic aim of our project is to create instant online community in which people communicate rapidly and conveniently with each other.
+# Goal
+The main goal of our project is to create an instant online community where people quickly and conveniently share content with each other and view content.
+
+# What problems does our website solve?
+The basic aim of our project is to create instant online community in which people communicate rapidly and conveniently with each other.
+
+# Scope and Features
+Simple Platform-Specific Logic Implementation
+
+# Project structure
+Login/registration page
+Home page
+Profile page
+Create profile page
+Edit profile page
+Category page
+Add post page
+Edit post page
+Article Details page
