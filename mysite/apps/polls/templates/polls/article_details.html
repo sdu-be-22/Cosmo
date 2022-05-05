@@ -6,6 +6,7 @@
 
 {% block content %}
 <div class="row justify-content-center">
+
         <h1 class="row justify-content-center">{{ post.title }}</h1>
         <div class="col-md-5 col-sm-12">
         <br/><br/>
@@ -37,31 +38,27 @@
         <br/>
         <form action="{% url 'like_post' post.pk %}" method="POST">
             {% csrf_token %}
-
             {% if user.is_authenticated %}
                 {% if liked %}
-                    <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-danger btn-sm bi bi-heart-fill"></button> <!--Unlike -->
+                    <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-danger btn-sm bi bi-hand-thumbs-up-fill"></button> <!--Unlike -->
                 {% else %}
-                    <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-primary btn-sm bi bi-heart"></button> <!--Like -->
-
+                    <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-primary btn-sm bi bi-hand-thumbs-up"></button> <!--Like -->
                 {% endif %}
             {% else %}
                 <small><a href="{% url 'login' %}">Login</a> to like</small>
             {% endif %}
-            - {{ total_likes }} Likes
+            - <div class="badge bg-primary rounded-pill">{{ total_likes }}</div>
         </form>
 
         <br/>
         <div class="card mb-3">
           <div class="row g-0">
             <div class="col-md-2">
-        {% if post.author.profile.profile_pic %}
-              <img src="{{ post.author.profile.profile_pic.url }}" class="img-fluid rounded-start" alt="...">
-
-        {% else %}
-              <img src="{% static 'polls/images/default_profile_pic.png' %}" class="img-fluid rounded-start" alt="...">
-
-        {% endif %}
+                {% if post.author.profile.profile_pic %}
+                      <img src="{{ post.author.profile.profile_pic.url }}" class="img-fluid rounded-start" alt="...">
+                {% else %}
+                      <img src="{% static 'polls/images/default_profile_pic.png' %}" class="img-fluid rounded-start" alt="...">
+                {% endif %}
             </div>
             <div class="col-md-10">
               <div class="card-body">
@@ -70,8 +67,6 @@
                     {{ post.author.last_name }}
                 </h5>
                 <p class="small text-muted">
-
-                    <a href="{% url 'show_profile_page' post.author.profile.id %}">Profile Page</a>
 
                     {% if post.author.profile.website_url %}
                         | <a href="{{ post.author.profile.website_url }}">Website</a>

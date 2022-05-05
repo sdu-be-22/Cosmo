@@ -1,0 +1,59 @@
+body{
+ margin: 0;
+ padding: 0;
+}
+
+nav {
+    background-color: #000051;
+}
+
+#id_website_url, #id_facebook_url, #id_twitter_url, #id_instagram_url, #id_pinterest_url, #id_phone {
+    width: 470px;
+}
+#id_email{
+    display: flex;
+  width: 470px;
+}
+#id_bio{
+    height: 200px;
+}
+
+.container1{
+ background-color: #FDCC4B;
+ background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    width: 100%;
+}
+.horizontal{
+  width: 100%;
+  height: 50px;
+  background-color: #FDCC4B;
+}
+.prof{
+  width: 600px;
+  height: 500px;
+  margin-top: 50px;
+  text-align: center;
+  margin-left: 250px;
+  margin-right: 250px;
+  background-color: white;
+  border-width: 20px;
+  border-color: blue;
+}
+.img.profpic{
+  width: 300px;
+  height: 300px;
+  margin-top: 50px;
+}
+.profcard{
+  margin-top: 50px;
+}
+.titlecard{
+  display: inline-block;
+  margin-top: 50px;
+  padding-left: 200px;
+}
+.textcard{
+  padding-left: 200px;
+}

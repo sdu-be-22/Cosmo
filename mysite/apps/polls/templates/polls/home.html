@@ -1,52 +1,200 @@
 {% extends 'polls/base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center mt-3">
-        <div class="col-md-5 col-sm-12 border-bottom">
-        <h1 class="row justify-content-center">Post</h1>
-        </div>
-    </div>
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-md-center">
+            {% if user.is_authenticated %}
+                <div class="col-md-2">
+                    {{ user.bio }}
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-12">
+                                {% if user.profile.profile_pic %}
+                                     <img src="{{ user.profile.profile_pic.url }}" class="img-fluid rounded-circle" alt="...">
+                                {% else %}
+                                     <img src="{% static 'polls/images/default_profile_pic.png' %}" class="img-fluid rounded-circle" alt="...">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        {{ user.first_name }}
+                                        {{ user.last_name }}
+                                    </h5>
+                                    <p class="card-text">{{ user.profile.bio }}</p>
+                                    {% if user.is_authenticated %}
+                                        {% if user.profile.profile_pic %}
+                                            <p style="text-align: center"><a style="text-decoration: none; color: darkblue" href="{% url 'show_profile_page' user.profile.id %}"><b>View Profile</b></a></p>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    {% for post in object_list %}
-    <div class="row justify-content-center mt-3">
-        <div class="col-md-5 col-sm-12 border-bottom">
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-12">
+                                <h3 style="text-align: center">Contact</h3>
+                                <p class="small text-muted" style="margin:0 52px">
+                                    {% if user.profile.website_url %}
+                                        <a href="{{ user.profile.website_url }}">Website</a>
+                                    {% endif %}
 
-            {% if page_user.profile_pic %}
-                <img src="{{ page_user.profile_pic.url }}" class="img-fluid rounded-start" alt="...">
-            {% else %}
-                <img src="{{ 'static/polls/images/default_profile_pic.png' }}" class="img-fluid rounded-start" alt="..." width="40px" height="40px">
+                                    {% if user.profile.facebook_url %}
+                                        <a href="{{ user.profile.facebook_url }}" class="bi bi-facebook"></a>
+                                    {% endif %}
+
+                                    {% if user.profile.instagram_url %}
+                                        | <a href="{{ user.profile.instagram_url }}" class="bi bi-instagram link-danger"></a>
+                                    {% endif %}
+
+                                    {% if user.profile.twitter_url %}
+                                        | <a href="{{ user.profile.twitter_url }}" class="bi bi-twitter"></a>
+                                    {% endif %}
+
+                                    {% if user.profile.pinterest_url %}
+                                        | <a href="{{ user.profile.pinterest_url }}" class="bi bi-pinterest link-danger"></a>
+                                    {% endif %}
+                                </p>
+                                <ul>
+                                    <li class="">{{ user.profile.phone }}</li>
+                                    <li class="">{{ user.profile.email }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
 
-                - {{ post.author.first_name }}
-                {{ post.author.last_name }} -
-                {{ post.post_date }}
+            <div class="col-md-6">
+                {% if user.is_authenticated %}
+                    <div class="card py-2">
+                        <!-- Button trigger modal -->
+                        <div class="d-flex my-2">
+                            <div class="mx-2">
+                                {% if user.profile.profile_pic %}
+                                    <img src="{{ user.profile.profile_pic.url }}" class="img-fluid rounded-circle" alt="" width="40px" height="40px">
+                                {% else %}
+                                    <img src="{% static 'polls/images/default_profile_pic.png' %}" class="img-fluid rounded-circle" alt="..." width="40px" height="40px">
+                                {%endif %}
+                            </div>
+                            <div class="mx-2" style="width: 550px;">
+                                <a class="text-decoration-none" href="{% url 'add_post' %}"><input type="text" class="form-control rounded-pill" name="post" placeholder="What's new, {{ user.first_name }}?"></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                <br/>
+
+                    <div class="row justify-content-between p-2 px-3">
+                    {% for post in object_list %}
+                        <div class="card" style="margin-bottom: 20px;">
+                            <div class="d-flex bd-highlight mb-3">
+                                <div class="me-auto p-2 bd-highlight">
+                                    {% if post.author.profile.profile_pic %}
+                                        <a class="text-decoration-none" href="{% url 'show_profile_page' post.author.profile.id %}">
+                                            <img src="{{ post.author.profile.profile_pic.url }}" class="img-fluid rounded-circle" alt="" width="40px" height="40px">
+                                        </a>
+                                    {% else %}
+                                        <img src="{% static 'polls/images/default_profile_pic.png' %}" class="img-fluid rounded-circle" alt="..." width="40px" height="40px">
+                                    {%endif %}
+                                    <span class="font-weight-bold">{{ post.author.first_name }} {{ post.author.last_name }}</span>
+                                    <small class="text-primary d-flex d-flex-column">
+                                        <a class="text-decoration-none" href="{% url 'category' post.category|slugify %}">{{ post.category }}</a>
+                                    </small>
+                                </div>
+                            <div class="p-2 bd-highlight"><small>{{ post.post_date }}</small></div>
+                            <div class="p-2 bd-highlight">
+                                {% if user.is_authenticated %}
+                                    {% if user.id == post.author.id %}
+                                        <a href="{% url 'update_post' post.pk %}" class="bi bi-pencil-square link-danger"></a>
+                                        <a href="{% url 'delete_post' post.pk %}" class="bi bi-trash link-danger"></a>
+                                    {% endif %}
+                                {% endif %}</div>
+                            </div>
+
+
+                        {% if post.header_image %}
+                            <img src='{{ post.header_image.url }}' class=""> <!-- img-fluid -->
+                        {% endif %}
+                        <div class="p-2">
+                            <h6>
+                                <a class="text-decoration-none" href="{% url 'article-detail' post.pk %}">{{ post.title }}</a>
+                            </h6>
+                            <p class="text-justify">{{ post.body|safe }}</p>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row icons d-flex align-items-center">
+                                    <form action="{% url 'like' post.pk %}" method="POST">
+                                        {% csrf_token %}
+                                        {% if user.is_authenticated %}
+                                            {% if liked %}
+                                                <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-danger btn-sm bi bi-hand-thumbs-up-fill"> </button> <!--Unlike -->
+                                            {% else %}
+                                                <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-danger btn-sm bi bi-hand-thumbs-up"> {{ post.likes.count }}</button> <!--Like -->
+                                            {% endif %}
+                                        {% else %}
+                                            <small><a href="{% url 'login' %}">Login</a> to like</small>
+                                        {% endif %}
+                                    </form>
+                                </div>
+                                {% if user.is_authenticated %}
+                                    <a class="btn btn-danger btn-sm bi bi-chat" href="{% url 'add_comment' post.pk %}" role="button"> {{ post.comments.count }}</a>
+                                {% endif %}
+                            </div>
+                            <hr>
+                            <!-- COMMENT -->
+                            <div class="comments">
+                                <div class="d-flex flex-column ml-2">
+                                     {% if not post.comments.all %}
+                                            No Comments Yet...
+                                        {% else %}
+                                    {% for comment in post.comments.all %}
+                                        {% if comment.user.profile.profile_pic %}
+                                            <a href="{% url 'show_profile_page' comment.user.profile.id %}">
+                                                <img src="{{ comment.user.profile.profile_pic.url }}" class="img-fluid rounded-circle" alt="" width="40px" height="40px">
+                                            </a>
+                                            {% else %}
+                                                <img src="{% static 'polls/images/default_profile_pic.png' %}" class="img-fluid rounded-circle" alt="..." width="40px" height="40px">
+                                            {%endif %}
+                                            <strong>
+                                                {{ comment.user }} - {{ comment.date_added }}
+                                            </strong>
+                                            {{ comment.body }}
+                                            <br/><br/>
+                                    {% endfor %}
+                                {% endif %}
+                                </div>
+                            </div>
+                            <br/>
+                        </div>
+                        </div><br/>
+                    {% endfor %}
+
+                    </div>
+
+            </div>
 
             {% if user.is_authenticated %}
-                {% if user.id == post.author.id %}
-                    - <a href="{% url 'update_post' post.pk %}" class="bi bi-pencil-square"></a>
-                    <a href="{% url 'delete_post' post.pk %}" class="bi bi-trash"></a>
-
-                {% endif %}
+                <div class="col-md-2">
+                    <div class="card mx-2">
+                        <div class="mx-5 my-2">
+                            <h6>Categories</h6>
+                        </div>
+                          {% if cat_menu %}
+                              <ul class="list-group d-inline-block">
+                                {% for item in cat_menu %}
+                                  <a class="list-group-item list-group-item-danger d-block text-decoration-none" href="{% url 'category' item|slugify %}">{{ item }}</a>
+                                {% endfor %}
+                              </ul>
+                          {% endif %}
+                    </div>
+                </div>
             {% endif %}
-
-            <a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> -
-            <a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a>
-
-
-            {% if post.header_image %}
-                <img src='{{ post.header_image.url }}' width="530px" height="300px">
-            {% endif %}
-            <br/>
-
-            {{ post.snippet }}
-            <!-- {{ post.body|slice:":200"|safe }} -->
-            <br/><br/>
         </div>
     </div>
-    {% endfor %}
-</div>
-
-<br/><br/>
 
 {% endblock %}

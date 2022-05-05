@@ -1,29 +1,54 @@
 {% extends 'polls/base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="row justify-content-center">
-    <h1 class="row justify-content-center">Login...</h1>
     <div class="col-md-6 col-sm-12">
         <br/><br/>
         {% if category_posts %}
 
             <h1>{{ cats }} Category</h1>
 
-            <ul>
             {% for post in category_posts %}
-                <li><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a>
-                    - {{ post.author.first_name }}
-                    {{ post.author.last_name }} -
-                    {{ post.post_date }}
+                <div class="card" style="margin-bottom: 20px;">
+                            <div class="d-flex bd-highlight mb-3">
+                                <div class="me-auto p-2 bd-highlight">
+                                    {% if post.author.profile.profile_pic %}
+                                        <a class="text-decoration-none" href="{% url 'show_profile_page' post.author.profile.id %}">
+                                            <img src="{{ post.author.profile.profile_pic.url }}" class="img-fluid rounded-circle" alt="" width="40px" height="40px">
+                                        </a>
+                                    {% else %}
+                                        <img src="{% static 'polls/images/default_profile_pic.png' %}" class="img-fluid rounded-circle" alt="..." width="40px" height="40px">
+                                    {%endif %}
+                                    <span class="font-weight-bold">{{ post.author.first_name }} {{ post.author.last_name }}</span>
+                                    <small class="text-primary d-flex d-flex-column">
+                                        <a class="text-decoration-none" href="{% url 'category' post.category|slugify %}">{{ post.category }}</a>
+                                    </small>
+                                </div>
+                            <div class="p-2 bd-highlight"><small>{{ post.post_date }}</small></div>
+                            <div class="p-2 bd-highlight">
+                                {% if user.is_authenticated %}
+                                    {% if user.id == post.author.id %}
+                                        <a href="{% url 'update_post' post.pk %}" class="bi bi-pencil-square link-danger"></a>
+                                        <a href="{% url 'delete_post' post.pk %}" class="bi bi-trash link-danger"></a>
+                                    {% endif %}
+                                {% endif %}</div>
+                            </div>
 
-                        {% if user.is_authenticated %}
-                            - <a href="{% url 'update_post' post.pk %}">(Edit)</a>
-                            <a href="{% url 'delete_post' post.pk %}">(Delete)</a><br/>
 
+                        {% if post.header_image %}
+                            <img src='{{ post.header_image.url }}' class=""> <!-- img-fluid -->
                         {% endif %}
-                    {{ post.body|slice:":200"|safe }}</li>
+                        <div class="p-2">
+                            <h6>
+                                <a class="text-decoration-none" href="{% url 'article-detail' post.pk %}">{{ post.title }}</a>
+                            </h6>
+                            <p class="text-justify">{{ post.body|safe }}</p>
+                            <hr>
+                            <br/>
+                        </div>
+                        </div>
             {% endfor %}
-            </ul>
 
         {% else %}
             <h2>Sorry this page does not exist...</h2>

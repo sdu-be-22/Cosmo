@@ -1,55 +1,51 @@
 {% extends 'polls/base.html' %}
 {% load static %}
-
 {% block content %}
-
-<div class="card mb-3">
-  <div class="row g-0">
-    <div class="col-md-2">
-{% if page_user.profile_pic %}
-      <img src="{{ page_user.profile_pic.url }}" class="img-fluid rounded-start" alt="...">
-{% else %}
-      <img src="{% static 'polls/images/default_profile_pic.png' %}" class="img-fluid rounded-start" alt="...">
-{% endif %}
-    </div>
+<div class="profcard" style="margin-top: 50px;">
     <div class="col-md-10">
-      <div class="card-body">
-        <h5 class="card-title">
+      <div class="prof">
+        <div class="card_bio">
+          {% if page_user.profile_pic %}
+            <img src="{{ page_user.profile_pic.url }}" class="profpic rounded mx-auto d-block" alt="..." style="width: 500px; height: 200px; padding-right: 100px;
+            padding-left: 150px;">
+          {% else %}
+            <img src="{% static 'polls/images/default_profile_pic.png' %}" class="img-fluid rounded-start" alt="...">
+          {% endif %}
+          <h5 class="titlecard" style="margin-top: 30px; padding-right: 200px;">
             {{ page_user.user.first_name }}
             {{ page_user.user.last_name }}
-        </h5>
-        <p class="small text-muted">
-
-            {% if page_user.website_url %}
-                | <a href="{{ page_user.website_url }}">Website</a>
-            {% endif %}
-
-            {% if page_user.facebook_url %}
-                | <a href="{{ page_user.facebook_url }}" class="bi bi-facebook"></a>
-            {% endif %}
-
-            {% if page_user.twitter_url %}
-                | <a href="{{ page_user.twitter_url }}" class="bi bi-twitter"></a>
-            {% endif %}
-
-            {% if page_user.instagram_url %}
-                | <a href="{{ page_user.instagram_url }}" class="bi bi-instagram"></a>
-            {% endif %}
-
-            {% if page_user.pinterest_url %}
-                | <a href="{{ page_user.pinterest_url }}" class="bi bi-pinterest"></a>
-            {% endif %}
-        </p>
-        <p class="card-text">{{ page_user.bio }}</p>
+          </h5>
+          <p class="textcard" style="padding-right: 200px;">{{ page_user.bio }}</p>
+        </div>
+        <div class="row g-0">
+          <div class="col-md-2 ">
+      <p class="small text-muted">
+        <div style="white-space: nowrap; overflow: auto; margin-left: 215px;" class="d-inline p-2 text-white">
+        {% if page_user.website_url %}
+            | <a  href="{{ page_user.website_url }}" style="display: block;">Website</a>
+        {% endif %}
+        {% if page_user.facebook_url %}
+            | <a href="{{ page_user.facebook_url }}" class="bi bi-facebook" style="display: inline-block;"></a>
+        {% endif %}
+        {% if page_user.instagram_url %}
+            | <a href="{{ page_user.instagram_url }}" class="bi bi-instagram" style="display: inline-block;"></a>
+        {% endif %}
+        {% if page_user.twitter_url %}
+            | <a href="{{ page_user.twitter_url }}" class="bi bi-twitter" style="display: inline-block;"></a>
+        {% endif %}
+        {% if page_user.pinterest_url %}
+            | <a href="{{ page_user.pinterest_url }}" class="bi bi-pinterest" style="display: inline-block;"></a>
+        {% endif %}
+        </div>
+    </p>
+          </div>
       </div>
     </div>
   </div>
 </div>
-
 {% for post in object_list %}
  - {{ post.author.first_name }}
                 {{ post.author.last_name }} -
                 {{ post.post_date }}
 {% endfor %}
-
 {% endblock %}

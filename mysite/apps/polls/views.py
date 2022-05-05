@@ -6,9 +6,22 @@ from .models import Post, Category, Comment, Profile
 from .forms import PostForm, EditForm, CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
+from django.http import JsonResponse
+
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # def home(request):
 #     return render(request, 'polls/home.html', {})
+
+#SEND EMAIL MESSAGE----------------
+from django.core.mail import send_mail
+
+
+def send_message(request):
+    send_mail("Web programming: back end", "Hello it is me", "200103252@stu.sdu.edu.kz", ["200103252@stu.sdu.edu.kz", "200103038@stu.sdu.edu.kz"], fail_silently=False)
+    # return render(request, 'polls/successful.html')
+#----------------------------------
 
 def LikeView(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
@@ -33,13 +46,14 @@ class HomeView(ListView):
         context['cat_menu'] = cat_menu
         return context
 
-def CategoryListView(request):
-    cat_menu_list = Category.objects.all()
-    return render(request, 'polls/category_list.html', {'cat_menu_list':cat_menu_list})
+# def CategoryListView(request):
+#     cat_menu_list = Category.objects.all()
+#     return render(request, 'polls/category_list.html', {'cat_menu_list':cat_menu_list})
 
 def CategoryView(request, cats):
     category_posts = Post.objects.filter(category=cats.replace('-', ' '))
     return render(request, 'polls/categories.html', {'cats':cats.title().replace('-', ' '), 'category_posts':category_posts})
+
 
 class ArticleDetailView(DetailView):
     model = Post
@@ -84,18 +98,6 @@ class AddCommentView(CreateView):
 
     success_url = reverse_lazy('home')
 
-class AddCategoryView(CreateView):
-    model = Category
-    #form_class = PostForm
-    template_name = 'polls/add_category.html'
-    fields = '__all__'
-    #fields = ('title', 'body')
-    def get_context_data(self, *args, **kwargs):
-        cat_menu = Category.objects.all()
-        context = super(AddCategoryView, self).get_context_data(*args, **kwargs)
-        context['cat_menu'] = cat_menu
-        return context
-
 class UpdatePostView(UpdateView):
     model = Post
     form_class = EditForm
@@ -129,3 +131,75 @@ class UserSearch(View):
         }
 
         return render(request, 'polls/search.html', context)
+
+class AddLike(LoginRequiredMixin, View):
+    def post(self, request, pk, *args, **kwargs):
+        post = Post.objects.get(pk=pk)
+        liked = False
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+            liked = False
+        else:
+            post.likes.add(request.user)
+            liked = True
+        home = request.POST.get('home', '/')
+        return HttpResponseRedirect(home)
+# class AddCommentLike(LoginRequiredMixin, View):
+#     def post(self, request, pk, *args, **kwargs):
+#         comment = Comment.objects.get(pk=pk)
+#
+#         is_dislike = False
+#
+#         for dislike in comment.dislikes.all():
+#             if dislike == request.user:
+#                 is_dislike = True
+#                 break
+#
+#         if is_dislike:
+#             comment.dislikes.remove(request.user)
+#
+#         is_like = False
+#
+#         for like in comment.likes.all():
+#             if like == request.user:
+#                 is_like = True
+#                 break
+#
+#         if not is_like:
+#             comment.likes.add(request.user)
+#
+#         if is_like:
+#             comment.likes.remove(request.user)
+#
+#         next = request.POST.get('next', '/')
+#         return HttpResponseRedirect(next)
+#
+# # class AddCommentDislike(LoginRequiredMixin, View):
+# #     def post(self, request, pk, *args, **kwargs):
+# #         comment = Comment.objects.get(pk=pk)
+# #
+# #         is_like = False
+# #
+# #         for like in comment.likes.all():
+# #             if like == request.user:
+# #                 is_like = True
+# #                 break
+# #
+# #         if is_like:
+# #             comment.likes.remove(request.user)
+# #
+# #         is_dislike = False
+# #
+# #         for dislike in comment.dislikes.all():
+# #             if dislike == request.user:
+# #                 is_dislike = True
+# #                 break
+# #
+# #         if not is_dislike:
+# #             comment.dislikes.add(request.user)
+# #
+# #         if is_dislike:
+# #             comment.dislikes.remove(request.user)
+# #
+# #         next = request.POST.get('next', '/')
+# #         return HttpResponseRedirect(next)

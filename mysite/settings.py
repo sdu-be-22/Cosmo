@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'polls',
     'members',
     'ckeditor',
+    'phonenumber_field',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -141,3 +142,11 @@ LOGOUT_REDIRECT_URL = 'login'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Send email message ---------------------
+EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST_USER="200103252@stu.sdu.edu.kz"
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_PASSWORD="ases5555"

@@ -1,20 +1,31 @@
 {% extends 'polls/base.html' %}
+{% load static %}
+
 {% block title %}Delete Blog Post{% endblock %}
+
 {% block content %}
 
 {% if user.is_authenticated %}
     {% if user.id == post.author.id %}
-        <h1>Delete Post...</h1>
-        <br/><br/>
-        <h3>Delete: {{ post.title }}</h3>
-
-        <br/>
-        <div class="form-group">
-            <form method="POST">
-                {% csrf_token %}
-                <strong>Are you sure?!</strong><br/><br/>
-                <button class="btn btn-secondary">Delete Post!</button>
-            </form>
+        <div class="delete-page card" style="max-width: 540px; margin: 200px 500px;">
+          <div class="row align-items-center g-0">
+            <div class="col-md-4">
+              <img src="{% static 'polls/images/delete_post.png' %}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">Delete Post: {{ post.title }}</h5>
+                <div class="form-group">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <p class="card-text">Are You Sure?</p>
+                         <p class="card-text"><small class="text-muted">You can change your mind:)</small></p>
+                        <button class="btn btn-danger">Delete Post!</button>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
     {% else %}
         You're not allowed here! (and you know it...)
