@@ -9,9 +9,9 @@ We are going to create a social network, where users can create a post and a pub
 # Team members
 Our team name is "Hypertext Assassins".
 
-* Amangeldin Erasyl - 200103252@stu.sdu.edu.kz
-* Rakhmetova Zhanar - 200103526@stu.sdu.edu.kz
-* Dauletova Maira - 200103317@stu.sdu.edu.kz
+* :man_technologist: Amangeldin Erasyl - 200103252@stu.sdu.edu.kz
+* :woman_technologist: Rakhmetova Zhanar - 200103526@stu.sdu.edu.kz
+* :woman_technologist: Dauletova Maira - 200103317@stu.sdu.edu.kz
 
 # Goal
 The main goal of our project is to create an instant online community where people quickly and conveniently share content with each other and view content.
