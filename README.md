@@ -1,4 +1,4 @@
-<h1 align="center">Hi , We're Cosmo Team</h1>
+<h1 align="center">Hi , We're Cosmo Team <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="35"></h1>
 
 # Description of project
 We are going to create a social network, where users can create a post and a public profile and communicate with other users, also people with similar interests could come together and share information, photos and videos.
