@@ -5,7 +5,7 @@ Website written of django for Users.
 We are going to create a social network, where users can create a post and a public profile and communicate with other users, also people with similar interests could come together and share information, photos and videos.
 
 # Mentor
-Bissenbay Dauletbayev - b.dauletbayev@sdu.edu.kz
+- Bissenbay Dauletbayev - b.dauletbayev@sdu.edu.kz
 
 # Team members
 Our team name is "Hypertext Assassins".
