@@ -10,9 +10,9 @@ Bissenbay Dauletbayev - b.dauletbayev@sdu.edu.kz
 # Team members
 Our team name is "Hypertext Assassins".
 
-Amangeldin Erasyl - 200103252@stu.sdu.edu.kz
-Rakhmetova Zhanar - 200103526@stu.sdu.edu.kz
-Dauletova Maira - 200103317@stu.sdu.edu.kz
+* Amangeldin Erasyl - 200103252@stu.sdu.edu.kz
+* Rakhmetova Zhanar - 200103526@stu.sdu.edu.kz
+* Dauletova Maira - 200103317@stu.sdu.edu.kz
 
 # Goal
 The main goal of our project is to create an instant online community where people quickly and conveniently share content with each other and view content.
