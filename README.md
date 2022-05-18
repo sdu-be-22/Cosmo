@@ -25,12 +25,12 @@ The basic aim of our project is to create instant online community in which peop
 Simple Platform-Specific Logic Implementation
 
 # Project structure
-Login/registration page
-Home page
-Profile page
-Create profile page
-Edit profile page
-Category page
-Add post page
-Edit post page
-Article Details page
+* Login/registration page
+* Home page
+* Profile page
+* Create profile page
+* Edit profile page
+* Category page
+* Add post page
+* Edit post page
+* Article Details page
