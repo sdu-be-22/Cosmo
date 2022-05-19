@@ -15,6 +15,9 @@ We are going to create a social network, where users can create a post and a pub
 * :woman_technologist: Rakhmetova Zhanar - 200103526@stu.sdu.edu.kz
 * :woman_technologist: Dauletova Maira - 200103317@stu.sdu.edu.kz
 
+# Presentation
+Link to [Presentation](https://www.canva.com/design/DAFA16bxEXg/sXKNS08plCknieKw1b3AKA/view?utm_content=DAFA16bxEXg&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
+
 # Goal
 The main goal of our project is to create an instant online community where people quickly and conveniently share content with each other and view content.
 
