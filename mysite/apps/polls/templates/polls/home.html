@@ -59,8 +59,8 @@
                                     {% endif %}
                                 </p>
                                 <ul>
-                                    <li class="">{{ user.profile.phone }}</li>
-                                    <li class="">{{ user.profile.email }}</li>
+                                    {{ user.profile.phone }}
+                                    {{ user.profile.email }}
                                 </ul>
                             </div>
                         </div>
@@ -163,8 +163,8 @@
                                             <strong>
                                                 {{ comment.user }} - {{ comment.date_added }}
                                             </strong>
-                                            {{ comment.body }}
-                                            <br/><br/>
+                                            {{ comment.comment }}
+                                            <br/>
                                     {% endfor %}
                                 {% endif %}
                                 </div>

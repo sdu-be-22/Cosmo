@@ -25,7 +25,7 @@ class PostForm(forms.ModelForm):
             'author': forms.TextInput(attrs={'class': 'form-control', 'value': '', 'id': 'user', 'type': 'hidden'}),
             # 'author': forms.Select(attrs={'class': 'form-control'}),
             'category': forms.Select(choices=choices, attrs={'class': 'form-control'}),
-            'body': forms.Textarea(attrs={'class': 'form-control'}),
+            'body': forms.Textarea(attrs={'class': 'form-control', 'rows':4}),
         }
 
 
@@ -40,17 +40,17 @@ class EditForm(forms.ModelForm):
             'title_tag': forms.TextInput(attrs={'class': 'form-control'}),
             # 'author': forms.Select(attrs={'class': 'form-control'}),
             'category': forms.Select(choices=choices, attrs={'class': 'form-control'}),
-            'body': forms.Textarea(attrs={'class': 'form-control'}),
+            'body': forms.Textarea(attrs={'class': 'form-control', 'rows':5}),
         }
 
 
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('user', 'body')
+        fields = ('user', 'comment')
 
         widgets = {
             # 'name': forms.TextInput(attrs={'class': 'comment'}),
             # 'placeholder': 'This is Title Placeholder Stuff'
-            'body': forms.Textarea(attrs={'class': 'comment'}),
+            'comment': forms.Textarea(attrs={'class': 'form-control', 'rows':3}),
         }
